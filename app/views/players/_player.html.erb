@@ -9,4 +9,6 @@
     <%= player.balance %>
   </p>
 
+  <%= button_to "Login as", action: :login, params: { player: player.name } unless cookies[:player]%>
+
 </div>

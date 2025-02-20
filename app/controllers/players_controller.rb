@@ -25,6 +25,8 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
+        cookies[:player] = @player.name
+
         format.html { redirect_to @player, notice: "Player was successfully created." }
         format.json { render :show, status: :created, location: @player }
       else
@@ -32,6 +34,20 @@ class PlayersController < ApplicationController
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def login
+    render status: :bad_request unless params[:player]
+
+    cookies[:player] = params[:player]
+    redirect_to sessions_url, notice: "Successfully logged in."
+    # format.json { render :show, status: :created, location: @player }
+  end
+
+  def logout
+    cookies.delete :player
+
+    redirect_to :action => "index", notice: "Successfully logged out."
   end
 
   # PATCH/PUT /players/1 or /players/1.json
