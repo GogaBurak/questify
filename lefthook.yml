@@ -1,0 +1,10 @@
+pre-push:
+  parallel: true
+  commands:
+    rubocop:
+      tags: backend
+      run: bundle exec rubocop
+# TODO: uncomment and rewrite
+#    rspec:
+#      tags: rspec backend
+#      run: bundle exec rspec --fail-fast
