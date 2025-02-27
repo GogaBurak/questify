@@ -35,5 +35,7 @@ module Questify
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators.test_framework nil # TODO: remove when setting up rspec
   end
 end
