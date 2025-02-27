@@ -1,12 +1,12 @@
 class GameSessionsController < ApplicationController
   before_action :set_game_session, only: %i[ show edit update destroy ]
 
-  # GET /game_sessions or /game_sessions.json
+  # GET /game_sessions
   def index
     @game_sessions = GameSession.all
   end
 
-  # GET /game_sessions/1 or /game_sessions/1.json
+  # GET /game_sessions/1
   def show
   end
 
@@ -19,42 +19,31 @@ class GameSessionsController < ApplicationController
   def edit
   end
 
-  # POST /game_sessions or /game_sessions.json
+  # POST /game_sessions
   def create
     @game_session = GameSession.new(game_session_params)
 
-    respond_to do |format|
-      if @game_session.save
-        format.html { redirect_to @game_session, notice: "Game session was successfully created." }
-        format.json { render :show, status: :created, location: @game_session }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @game_session.errors, status: :unprocessable_entity }
-      end
+    if @game_session.save
+      redirect_to @game_session, notice: "Game session was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /game_sessions/1 or /game_sessions/1.json
+  # PATCH/PUT /game_sessions/1
   def update
-    respond_to do |format|
-      if @game_session.update(game_session_params)
-        format.html { redirect_to @game_session, notice: "Game session was successfully updated." }
-        format.json { render :show, status: :ok, location: @game_session }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @game_session.errors, status: :unprocessable_entity }
-      end
+    if @game_session.update(game_session_params)
+      redirect_to @game_session, notice: "Game session was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /game_sessions/1 or /game_sessions/1.json
+  # DELETE /game_sessions/1
   def destroy
     @game_session.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to game_sessions_path, status: :see_other, notice: "Game session was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to game_sessions_path, status: :see_other, notice: "Game session was successfully destroyed."
   end
 
   private
