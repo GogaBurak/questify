@@ -9,4 +9,5 @@
     <%= player.balance %>
   </p>
 
+  <%= button_to "Login as", login_player_path(player) unless cookies[Constants::AUTH_COOKIE]%>
 </div>

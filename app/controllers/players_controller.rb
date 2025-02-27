@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: %i[ show edit update destroy ]
+  skip_before_action :authorize_request, only: %i[index show new create login]
 
   # GET /players
   def index
@@ -19,17 +20,6 @@ class PlayersController < ApplicationController
   def edit
   end
 
-  # POST /players
-  def create
-    @player = Player.new(player_params)
-
-    if @player.save
-      redirect_to @player, notice: "Player was successfully created."
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   # PATCH/PUT /players/1
   def update
     if @player.update(player_params)
@@ -37,6 +27,44 @@ class PlayersController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  # POST /players
+  def create
+    @player = Player.new(player_params)
+
+    if @player.save
+      token = JsonWebToken.encode(player_id: params[:id])[:token]
+      cookies[Constants::AUTH_COOKIE] = {
+        value: "Bearer #{token}",
+        expires: 1.year.from_now,
+        domain: "localhost" # FIXME
+      }
+      redirect_to @player, notice: "Player was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  # POST /players/1/login
+  def login
+    head :bad_request unless params[:id]
+
+    token = JsonWebToken.encode(player_id: params[:id])[:token]
+    cookies[Constants::AUTH_COOKIE] = {
+      value: "Bearer #{token}",
+      expires: 1.year.from_now,
+      domain: "localhost" # FIXME
+    }
+    # binding.pry
+    redirect_to game_sessions_url
+  end
+
+  def logout
+    return head :bad_request unless @current_player
+
+    cookies.delete(Constants::AUTH_COOKIE, domain: "localhost")
+    redirect_to players_url
   end
 
   # DELETE /players/1

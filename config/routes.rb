@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :game_sessions
   resources :players
+  post "players/:id/login", to: "players#login", as: :login_player
+  post "players/logout", to: "players#logout", as: :logout_player
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
