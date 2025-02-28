@@ -1,3 +1,3 @@
 class Player < ApplicationRecord
-  has_many :game_sessions
+  has_and_belongs_to_many :game_sessions
 end

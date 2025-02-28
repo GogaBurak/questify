@@ -34,7 +34,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
 
     if @player.save
-      token = JsonWebToken.encode(player_id: params[:id])[:token]
+      token = JsonWebToken.encode(player_id: @player.id)[:token] # TODO: move to helpers
       cookies[Constants::AUTH_COOKIE] = {
         value: "Bearer #{token}",
         expires: 1.year.from_now,
@@ -69,6 +69,7 @@ class PlayersController < ApplicationController
 
   # DELETE /players/1
   def destroy
+    return head :unauthorized unless @player.id == @current_player.id
     @player.destroy!
 
     redirect_to players_path, status: :see_other, notice: "Player was successfully destroyed."

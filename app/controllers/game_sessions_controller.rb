@@ -1,5 +1,7 @@
 class GameSessionsController < ApplicationController
-  before_action :set_game_session, only: %i[ show edit update destroy ]
+  include GameSessionsHelper
+
+  before_action :set_game_session, only: %i[ show edit update destroy join leave]
 
   # GET /game_sessions
   def index
@@ -44,6 +46,32 @@ class GameSessionsController < ApplicationController
     @game_session.destroy!
 
     redirect_to game_sessions_path, status: :see_other, notice: "Game session was successfully destroyed."
+  end
+
+  # POST /game_sessions/1/join
+  def join
+    if already_joined?
+      flash[:alert] = "Already joined."
+      redirect_to game_session_path(@game_session)
+    else
+      @game_session.players << @current_player
+
+      flash[:notice] = "Game session was successfully joined."
+      redirect_to game_session_path(@game_session)
+    end
+  end
+
+  # POST /game_sessions/1/leave
+  def leave
+    if already_joined?
+      @game_session.players.delete(@current_player)
+
+      flash[:notice] = "Game session was successfully left."
+      redirect_to game_session_path(@game_session)
+    else
+      flash[:alert] = "Not currently joined."
+      redirect_to game_session_path(@game_session)
+    end
   end
 
   private

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   resources :game_sessions
+  post "game_sessions/:id/join", to: "game_sessions#join", as: :join_game_session
+  delete "game_sessions/:id/leave", to: "game_sessions#leave", as: :leave_game_session
+
   resources :players
   post "players/:id/login", to: "players#login", as: :login_player
-  post "players/logout", to: "players#logout", as: :logout_player
+  post "players/logout", to: "players#logout", as: :logout_player # TODO: use delete
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
