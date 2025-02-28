@@ -50,20 +50,20 @@ class GameSessionsController < ApplicationController
 
   # POST /game_sessions/1/join
   def join
-    if already_joined?
+    if already_joined?(@game_session)
       flash[:alert] = "Already joined."
-      redirect_to game_session_path(@game_session)
+      redirect_back_or_to game_session_path(@game_session)
     else
       @game_session.players << @current_player
 
       flash[:notice] = "Game session was successfully joined."
-      redirect_to game_session_path(@game_session)
+      redirect_back_or_to game_session_path(@game_session)
     end
   end
 
   # POST /game_sessions/1/leave
   def leave
-    if already_joined?
+    if already_joined?(@game_session)
       @game_session.players.delete(@current_player)
 
       flash[:notice] = "Game session was successfully left."

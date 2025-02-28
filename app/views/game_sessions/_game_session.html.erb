@@ -24,4 +24,7 @@
       <% end %>
     </ul>
   </p>
+
+  <%= button_to "Join this session", join_game_session_path(game_session) unless already_joined?(game_session)%>
+  <%= button_to "Leave this session", leave_game_session_path(game_session), method: :delete if already_joined?(game_session)%>
 </div>
