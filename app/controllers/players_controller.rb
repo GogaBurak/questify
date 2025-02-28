@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  include PlayersHelper
+
   before_action :set_player, only: %i[ show edit update destroy ]
   skip_before_action :authorize_request, only: %i[index show new create login]
 
@@ -34,12 +36,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
 
     if @player.save
-      token = JsonWebToken.encode(player_id: @player.id)[:token] # TODO: move to helpers
-      cookies[Constants::AUTH_COOKIE] = {
-        value: "Bearer #{token}",
-        expires: 1.year.from_now,
-        domain: "localhost" # FIXME
-      }
+      set_auth_cookie(@player.id)
       redirect_to @player, notice: "Player was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -48,23 +45,18 @@ class PlayersController < ApplicationController
 
   # POST /players/1/login
   def login
-    head :bad_request unless params[:id]
+    set_auth_cookie(params[:id])
 
-    token = JsonWebToken.encode(player_id: params[:id])[:token]
-    cookies[Constants::AUTH_COOKIE] = {
-      value: "Bearer #{token}",
-      expires: 1.year.from_now,
-      domain: "localhost" # FIXME
-    }
-    # binding.pry
-    redirect_to game_sessions_url
+    flash[:notice] = "Successfully logged in."
+    redirect_back_or_to game_sessions_url
   end
 
+  # DELETE /logout
   def logout
-    return head :bad_request unless @current_player
+    delete_auth_cookie
 
-    cookies.delete(Constants::AUTH_COOKIE, domain: "localhost")
-    redirect_to players_url
+    flash[:notice] = "Successfully logged out."
+    redirect_back_or_to game_sessions_url
   end
 
   # DELETE /players/1
