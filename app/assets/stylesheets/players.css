@@ -1,0 +1,87 @@
+/* 
+index.html.erb
+_player.html.erb 
+*/
+
+* {
+    text-align: center;
+    font-family: "Coiny", system-ui;
+}
+
+[id^="player_"] {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 20px auto;
+    padding: 10px 0px;
+    max-width: 250px;
+    border-radius: 20px;
+}
+
+.headline {
+    color: #ffdf00;
+    font-family: "Press Start 2P", system-ui;
+}
+
+.button-new {
+    color: #000;
+    text-decoration: none;
+    background-color: #FFAA00;
+    padding: 10px;
+    border: 2px black solid;
+    border-radius: 50px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.button-new:hover {
+    color: #FFAA00;
+    background-color: black;
+}
+
+.lnk {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    text-shadow: 0px 0px 5px #FFAA00;
+}
+
+.lnk:hover {
+    color: #ffdf00;
+    text-shadow: 0px 0px 5px #000;
+}
+
+.p-lnk {
+    margin-bottom: 8px;
+    margin-top: 5px;
+}
+
+p:has(.player-name) {
+    font-size: 25px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+p:has(.player-balance) {
+    margin-bottom: 15px;
+    margin-top: 0px;
+}
+
+.btn-login {
+    color: #000;
+    background-color: white;
+    padding: 3px 15px;
+    border: 2px black solid;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    color: #fff;
+    background-color: black;
+}
+
+.notice {
+    color: white;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
