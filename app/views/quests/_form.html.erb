@@ -1,0 +1,47 @@
+<%= form_with(model: quest, url: game_session_quests_path) do |form| %>
+  <% if quest.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(quest.errors.count, "error") %> prohibited this quest from being saved:</h2>
+
+      <ul>
+        <% quest.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.textarea :description %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :reward, style: "display: block" %>
+    <%= form.number_field :reward %>
+  </div>
+
+  <div>
+    <%= form.label :game_session_id, style: "display: block" %>
+    <%= form.text_field :game_session_id %>
+  </div>
+
+  <div>
+    <%= form.label :player_id, style: "display: block" %>
+    <%= form.text_field :player_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

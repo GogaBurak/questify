@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Quests" %>
+
+<h1>Quests</h1>
+
+<div id="quests">
+  <% @quests.each do |quest| %>
+    <%= render quest %>
+    <p>
+      <%= link_to "Show this quest", game_session_quest_path(game_session_id: quest.game_session_id, id: quest.id) %>
+    </p>
+  <% end %>
+</div>
+
+<%= button_to "Get new quest", game_session_quests_path %>

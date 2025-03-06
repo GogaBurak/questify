@@ -10,6 +10,11 @@ class GameSessionsController < ApplicationController
 
   # GET /game_sessions/1
   def show
+    @game_session_quest = Quest.find_by(
+      status: :in_progress,
+      game_session_id: @game_session.id,
+      player_id: @current_player
+    )
   end
 
   # GET /game_sessions/new
