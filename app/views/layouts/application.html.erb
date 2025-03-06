@@ -27,9 +27,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="background-image: url('/background.png');">
+  <body style="background-image: url('/background.png');"> <!-- FIX ME -->
     <div class="container">
-      <%= yield %>
+      <div class="scroll">
+        <%= yield %>
+      </div>
     <div>
   </body>
 </html>
