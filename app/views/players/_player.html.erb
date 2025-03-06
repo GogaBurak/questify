@@ -1,13 +1,20 @@
 <div id="<%= dom_id player %>">
   <p>
-    <strong>Name:</strong>
-    <%= player.name %>
+    <span class="player-name">
+      <%= player.name %>
+    </span>
   </p>
 
   <p>
     <strong>Balance:</strong>
-    <%= player.balance %>
+    <span class="player-balance">
+      <%= player.balance %>
+    </span>
   </p>
 
-  <%= button_to "Login as", login_player_path(player) unless cookies[Constants::AUTH_COOKIE]%>
+  <%= button_to "Login as", login_player_path(player), class: "btn-login" unless cookies[Constants::AUTH_COOKIE] %>
+    
+  <p class="p-lnk">
+    <%= link_to "Show this player", player, class: 'lnk' %>
+  </p>
 </div>
