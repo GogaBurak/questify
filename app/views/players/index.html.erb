@@ -14,4 +14,3 @@
   <%= link_to "New player", new_player_path, class: 'button-new' %>
   <%= link_to "Go to game sessions", game_sessions_path if cookies[Constants::AUTH_COOKIE]%>
   <%= button_to "Logout", logout_player_path, method: :delete if cookies[Constants::AUTH_COOKIE]%>
-  
