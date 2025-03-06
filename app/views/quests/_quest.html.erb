@@ -1,0 +1,29 @@
+<div id="<%= dom_id quest %>">
+  <p>
+    <%= quest.title %>
+  </p>
+
+  <p>
+    <%= quest.description %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= quest.status %>
+  </p>
+
+  <p>
+    <strong>Reward:</strong>
+    <%= quest.reward %>
+  </p>
+
+  <%= button_to "Submit",
+                submit_game_session_quest_path(@game_session, quest),
+                method: :patch,
+                data: { controller: 'confirm', action: 'click->confirm#confirm' } %>
+  <%= button_to "Discard",
+                discard_game_session_quest_path(@game_session, quest),
+                method: :delete,
+                data: { controller: 'confirm', action: 'click->confirm#confirm' } %>
+  <%#= button_to "Report" TODO%>
+</div>

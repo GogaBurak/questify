@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  resources :game_sessions
-  post "game_sessions/:id/join", to: "game_sessions#join", as: :join_game_session
+  resources :game_sessions do
+    resources :quests, only: [ :create, :show ] do
+      member do
+        patch :submit
+        delete :discard
+      end
+    end
+  end
+  post "game_sessions/:id/join", to: "game_sessions#join", as: :join_game_session # TODO: put inside game_sessions block
   delete "game_sessions/:id/leave", to: "game_sessions#leave", as: :leave_game_session
 
   resources :players

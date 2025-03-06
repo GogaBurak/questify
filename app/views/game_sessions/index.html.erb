@@ -6,10 +6,8 @@
 
 <div id="game_sessions">
   <% @game_sessions.each do |game_session| %>
+    <%= link_to game_session.title, game_session %>
     <%= render game_session %>
-    <p>
-      <%= link_to "Show this game session", game_session %>
-    </p>
   <% end %>
 </div>
 
