@@ -12,11 +12,11 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label :name, style: "display: block", class: "label" %>
+    <%= form.text_field :name, class: "input-name", placeholder: "Pukish" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn-update" %>
   </div>
 <% end %>

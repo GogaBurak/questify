@@ -1,15 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
 
 <% content_for :title, "GameSessions" %>
 
-<h1>Game Sessions</h1>
+<h1 class="headline">Game Sessions</h1>
 
 <div id="game_sessions">
   <% @game_sessions.each do |game_session| %>
-    <%= link_to game_session.title, game_session %>
+    <%= link_to game_session.title, game_session, class: "title lnk-title" %>
     <%= render game_session %>
   <% end %>
 </div>
 
-<%= link_to "New game session", new_game_session_path %>
-<%= link_to "Back to players", players_path %>
+<%= link_to "New game session", new_game_session_path, class: "lnk-new" %> |
+<%= link_to "Back to players", players_path, class: "lnk-back" %>

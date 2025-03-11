@@ -1,14 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
 
 <p>
-  <strong><%= @game_session.title %></strong>
-  <%= link_to "Edit this game session", edit_game_session_path(@game_session) %>
+  <strong class="game-title"><%= @game_session.title %></strong> <br />
+  <%= link_to "Edit this game session", edit_game_session_path(@game_session), class: "lnk" %>
 </p>
 
 <%= render @game_session %>
 
 <% if @game_session_quest %>
-  <p>Current Objective</p>
+  <p class="objective-title">Current Objective</p>
 
   <%= render @game_session_quest%>
 <% elsif already_joined?(@game_session) %>
@@ -18,6 +18,6 @@
 <%#= link_to "Quests", game_session_quests_path(@game_session) %>
 
 <div>
-  <%= link_to "Back to game sessions", game_sessions_path %>
+  <%= link_to "Back to game sessions", game_sessions_path, class: "lnk-back" %>
   <%#= button_to "Destroy this game session", @game_session, method: :delete %> <!-- FIXME-->
 </div>
