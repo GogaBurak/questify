@@ -1,5 +1,5 @@
 class JsonWebToken
-  SECRET_KEY = Rails.application.credentials.secret_key_base
+  SECRET_KEY = ENV["SECRET_KEY_BASE"] || Rails.application.credentials.secret_key_base
   # EXPIRATION_TIME = 24.hours
 
   # def self.encode(payload, exp = EXPIRATION_TIME)

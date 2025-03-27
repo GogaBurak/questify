@@ -1,9 +1,10 @@
 require "openai"
 
 class QuestGenerator
+  API_KEY = ENV["OPENROUTER_API_KEY"] || Rails.application.credentials.dig(:openrouter, :api_key)
   def self.generate(player_name)
     client = OpenAI::Client.new(
-      access_token: Rails.application.credentials.dig(:openrouter, :api_key),
+      access_token: API_KEY,
       uri_base: "https://openrouter.ai/api/v1"
     )
 
