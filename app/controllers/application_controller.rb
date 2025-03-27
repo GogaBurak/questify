@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_current_player
+    return unless cookies[Constants::AUTH_COOKIE]
+    authorize_request
+  end
+
   private
 
   def parse_header(header)

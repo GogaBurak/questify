@@ -6,6 +6,7 @@ class PlayersController < ApplicationController
 
   # GET /players
   def index
+    set_current_player
     @players = Player.all
   end
 
