@@ -25,14 +25,23 @@ class QuestsController < ApplicationController
 
   # PATCH /game_sessions/:game_session_id/quests/:id
   def submit
-    if @quest.update(status: :completed)
-      flash[:notice] = "Quest was successfully submitted."
-      redirect_back_or_to @quest.game_session
-    else
-      flash[:alert] = "Something went wrong."
-      redirect_back_or_to @quest.game_session
+    ActiveRecord::Base.transaction do
+      if @quest.update(status: :completed)
+        player = @quest.player
+        player.update!(balance: player.balance + @quest.reward)
+
+        flash[:notice] = "Quest was successfully submitted! You earned #{@quest.reward} points."
+        redirect_back_or_to @quest.game_session
+      else
+        flash[:alert] = "Something went wrong."
+        redirect_back_or_to @quest.game_session
+      end
     end
+  rescue => e
+    flash[:alert] = "An error occurred: #{e.message}"
+    redirect_back_or_to @quest.game_session
   end
+
 
   # DELETE /game_sessions/:game_session_id/quests/:id
   def discard
