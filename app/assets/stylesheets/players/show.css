@@ -1,0 +1,37 @@
+/* show.html.erb */
+
+.lnk-edit,
+.lnk-back {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+    text-shadow: 0px 0px 5px #FFAA00;
+}
+
+.lnk-edit:hover,
+.lnk-back:hover {
+    border-bottom: 1px solid;
+    text-shadow: 0px 0px 5px #000;
+}
+
+.btn-destroy {
+    color: #000;
+    text-decoration: none;
+    background-color: #FFAA00;
+    padding: 5px 10px;
+    border: 2px black solid;
+    border-radius: 50px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-destroy:hover {
+    color: #FFAA00;
+    background-color: black;
+}
+
+.notice {
+    color: #b2ff79;
+    text-decoration: underline;
+    text-transform: uppercase;
+}

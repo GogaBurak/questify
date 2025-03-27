@@ -12,21 +12,21 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, style: "display: block", class: "title" %>
+    <%= form.text_field :title, class: "input input-title", placeholder: "KakishGame" %>
   </div>
 
   <div>
-    <%= form.label :started_at, style: "display: block" %>
-    <%= form.datetime_field :started_at, value: DateTime.now.strftime("%Y-%m-%dT%H:%M") %>
+    <%= form.label :started_at, style: "display: block", class: "title" %>
+    <%= form.datetime_field :started_at, class: "input input-date", value: DateTime.now.strftime("%Y-%m-%dT%H:%M") %>
   </div>
 
   <div>
-    <%= form.label :duration, style: "display: block" %>
-    <%= form.time_field :duration, value: "00:00:00" %>
+    <%= form.label :duration, style: "display: block", class: "title" %>
+    <%= form.time_field :duration, class: "input input-duration", value: "00:00:00" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "button-new" %>
   </div>
 <% end %>

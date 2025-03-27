@@ -21,7 +21,7 @@ _player.html.erb
     font-family: "Press Start 2P", system-ui;
 }
 
-.button-new {
+.button-new, .game-session-link {
     color: #000;
     text-decoration: none;
     background-color: #FFAA00;
@@ -32,7 +32,11 @@ _player.html.erb
     text-transform: uppercase;
 }
 
-.button-new:hover {
+.btn-container{
+    margin: 20px 0px 5px 0px;
+}
+
+.button-new:hover, .game-session-link:hover {
     color: #FFAA00;
     background-color: black;
 }
@@ -66,7 +70,7 @@ p:has(.player-balance) {
     margin-top: 0px;
 }
 
-.btn-login {
+.btn-login, .btn-logout {
     color: #000;
     background-color: white;
     padding: 3px 15px;
@@ -75,7 +79,7 @@ p:has(.player-balance) {
     transition: 0.3s;
 }
 
-.btn-login:hover {
+.btn-login:hover, .btn-logout:hover {
     color: #fff;
     background-color: black;
 }
@@ -84,4 +88,8 @@ p:has(.player-balance) {
     color: white;
     text-decoration: underline;
     text-transform: uppercase;
+}
+
+.btn-logout {
+    margin: 10px;
 }
