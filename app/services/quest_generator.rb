@@ -9,7 +9,7 @@ class QuestGenerator
 
     response = client.chat(
       parameters: {
-        model: "mistralai/mistral-7b-instruct", # or another OpenRouter model
+        model: "openai/gpt-4o-search-preview",
         messages: [
           { role: "system", content: "You are a Minecraft quest master who generates hilarious and chaotic quests." },
           { role: "user", content: "Generate a unique and mischievous Minecraft quest targeting player **#{player_name}**. Use this format:\n\n" \
