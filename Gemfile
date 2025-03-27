@@ -59,3 +59,5 @@ end
 
 group :test do
 end
+
+gem "ruby-openai", "~> 8.0"
