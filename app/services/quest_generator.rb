@@ -2,7 +2,8 @@ require "openai"
 
 class QuestGenerator
   API_KEY = ENV["OPENROUTER_API_KEY"] || Rails.application.credentials.dig(:openrouter, :api_key)
-  def self.generate(player_name)
+
+  def self.generate(player_names, language = "english")
     client = OpenAI::Client.new(
       access_token: API_KEY,
       uri_base: "https://openrouter.ai/api/v1"
@@ -10,22 +11,25 @@ class QuestGenerator
 
     response = client.chat(
       parameters: {
-        model: "openai/gpt-4o-search-preview",
+        model: "qwen/qwen2.5-vl-32b-instruct:free",
         messages: [
-          { role: "system", content: "You are a Minecraft quest master who generates hilarious and chaotic quests." },
-          { role: "user", content: "Generate a unique and mischievous Minecraft quest targeting player **#{player_name}**. Use this format:\n\n" \
-            "Title: [Funny Quest Title]\n" \
-            "Description: [Hilarious instructions]\n" \
-            "Reward: [100-500]\n\n" \
-            "Examples:\n\n" \
-            "Title: The Great Chicken Flood\n" \
-            "Description: Spawn an army of chickens in #{player_name}'s base until their FPS drops below 10. No mercy.\n" \
-            "Reward: 350\n\n" \
-            "Title: The Rotten Victory\n" \
-            "Description: Defeat #{player_name} in PVP using only rotten flesh. Style points if they rage quit.\n" \
-            "Reward: 400\n\n" \
-            "Now generate a **new** and **original** quest!" }
+          { role: "system", content: "You are a Minecraft quest master who generates hilarious and chaotic quests. **Respond only in JSON format**." },
+          { role: "user", content: "Generate a unique and mischievous Minecraft quest in #{language}. Quest can target players #{player_names.join(", ")}. **Return JSON only** using this structure:\n\n" \
+            "{\n" \
+            '  "title": "[Funny Quest Title]",' \
+            '  "description": "[Hilarious instructions]",' \
+            '  "reward": [100-500]' \
+            "}\n\n" \
+            "Example:\n\n" \
+            "{\n" \
+            '  "title": "The Great Chicken Flood",' \
+            "  \"description\": \"Spawn an army of chickens in PlayerName\'s base until their FPS drops below 10. No mercy.\"," \
+            '  "reward": 350' \
+            "}\n\n" \
+            "Now generate a **new** and **original** quest in JSON format!" }
         ],
+        temperature: 0.7,
+        top_p: 0.9,
         max_tokens: 150
       }
     )
@@ -33,19 +37,9 @@ class QuestGenerator
     parse_response(response)
   end
 
-
   def self.parse_response(response)
     content = response.dig("choices", 0, "message", "content")
 
-    if content
-      match = content.match(/Title: (.*?)\nDescription: (.*?)\nReward: (\d+)/m)
-      if match
-        { title: match[1], description: match[2], reward: match[3].to_i }
-      else
-        { title: "Unknown Quest", description: "AI did not return structured data.", reward: 100 }
-      end
-    else
-      { title: "Error", description: "Failed to get AI response.", reward: 100 }
-    end
+    JSON.parse(content, symbolize_names: true)
   end
 end

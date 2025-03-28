@@ -84,12 +84,6 @@ p:has(.player-balance) {
     background-color: black;
 }
 
-.notice {
-    color: white;
-    text-decoration: underline;
-    text-transform: uppercase;
-}
-
 .btn-logout {
     margin: 10px;
 }

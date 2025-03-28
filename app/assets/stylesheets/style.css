@@ -24,3 +24,15 @@ body {
     overflow-y: scroll;
     margin-top: 20px;
 }
+
+.notice {
+    color: green;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+.alert {
+    color: red;
+    text-decoration: underline;
+    text-transform: uppercase;
+}

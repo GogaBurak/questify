@@ -12,14 +12,22 @@ class QuestsController < ApplicationController
 
   # POST /game_sessions/:game_session_id/quests
   def create
-    @quest = Quest.generate_quest(game_session_id: params[:game_session_id], player_id: @current_player.id)
+    @game_session = GameSession.find(params.expect(:game_session_id))
+    begin
+      quest_data = Quest.generate_quest_data(@game_session, @current_player)
+    rescue JSON::ParserError => e
+      flash[:alert] = "AI error. #{e.message}"
+      redirect_back_or_to @game_session
+    end
+    @quest = @game_session.quests.new quest_data&.merge({ player: @current_player })
 
     if @quest.save
       flash[:notice] = "Quest was successfully created."
-      redirect_back_or_to @quest.game_session
+      redirect_back_or_to @game_session
     else
       flash[:alert] = "Something went wrong."
-      redirect_back_or_to @quest.game_session
+      binding.pry
+      redirect_back_or_to @game_session
     end
   end
 
