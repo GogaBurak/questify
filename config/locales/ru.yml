@@ -1,0 +1,50 @@
+ru:
+  players:
+    title: "Игроки"
+    balance: "Баланс"
+    new_player_btn: "НОВЫЙ ИГРОК"
+    game_sessions_link: "ПЕРЕЙТИ К СЕССИЯМ"
+    login_btn: "Войти как"
+    logout_btn: "Выйти"
+    notice:
+      update_success: "Игрок был успешно обновлён."
+      create_success: "Игрок был успешно создан."
+      destroy_success: "Игрок был успешно удалён."
+      login_success: "Успешный вход."
+      logout_success: "Успешный выход."
+
+  game_sessions: &game_sessions
+    title: "Игровые сессии"
+    started_at: "Начало"
+    duration: "Длительность"
+    players: "Игроки"
+    back_link: "Назад к игрокам"
+    create_btn: "Новая сессия"
+    join_btn: "Присоединиться к сессии"
+    leave_btn: "Покинуть сессию"
+    notice:
+      create_success: "Игровая сессия успешно создана."
+      update_success: "Игровая сессия успешно обновлена."
+      destroy_success: "Игровая сессия успешно удалена."
+      join_success: "Вы успешно присоединились к сессии."
+      leave_success: "Вы успешно покинули сессию."
+    alert:
+      joined: "Вы уже присоединились."
+      not_joined: "Вы ещё не присоединились."
+
+  game_session:
+    <<: *game_sessions
+    title: "Название"
+    quest: "Текущее задание"
+    get_quest_btn: "Новый квест"
+    back_btn: "Назад к сессиям"
+
+  quest:
+    status:
+      title: 'Статус'
+      in_progress: 'В процессе'
+      discarded: 'Отменена'
+      completed: 'Завершена'
+    reward: "Награда"
+    submit_btn: "Готово"
+    discard_btn: "Отмена"

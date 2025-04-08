@@ -26,7 +26,7 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1
   def update
     if @player.update(player_params)
-      redirect_to @player, notice: "Player was successfully updated."
+      redirect_to @player, notice: I18n.t("players.notice.update_success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class PlayersController < ApplicationController
 
     if @player.save
       set_auth_cookie(@player.id)
-      redirect_to @player, notice: "Player was successfully created."
+      redirect_to @player, notice: I18n.t("players.notice.create_success")
     else
       render :new, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class PlayersController < ApplicationController
   def login
     set_auth_cookie(params[:id])
 
-    flash[:notice] = "Successfully logged in."
+    flash[:notice] = I18n.t("players.notice.login_success")
     redirect_back_or_to game_sessions_url
   end
 
@@ -56,7 +56,7 @@ class PlayersController < ApplicationController
   def logout
     delete_auth_cookie
 
-    flash[:notice] = "Successfully logged out."
+    flash[:notice] = I18n.t("players.notice.logout_success")
     redirect_back_or_to game_sessions_url
   end
 
@@ -65,7 +65,7 @@ class PlayersController < ApplicationController
     return head :unauthorized unless @player.id == @current_player.id
     @player.destroy!
 
-    redirect_to players_path, status: :see_other, notice: "Player was successfully destroyed."
+    redirect_to players_path, status: :see_other, notice: I18n.t("players.notice.destroy_success")
   end
 
   private

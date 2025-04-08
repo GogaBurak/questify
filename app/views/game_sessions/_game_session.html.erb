@@ -1,16 +1,16 @@
 <div id="<%= dom_id game_session %>">
   <p>
-    <strong>Started at:</strong> <br />
+    <strong><%= I18n.t("game_sessions.started_at") %>:</strong> <br />
     <%= game_session.started_at %>
   </p>
 
   <p>
-    <strong>Duration:</strong>
+    <strong><%= I18n.t("game_sessions.duration") %>:</strong>
     <%= game_session.duration %>
   </p>
 
   <p>
-    <strong>Players:</strong>
+    <strong><%= I18n.t("game_sessions.players") %>:</strong>
     <ul>
       <% game_session.players.each do |player| %>
         <li>
@@ -20,6 +20,6 @@
     </ul>
   </p>
 
-  <%= button_to "Join this session", join_game_session_path(game_session) unless already_joined?(game_session)%>
-  <%= button_to "Leave this session", leave_game_session_path(game_session), method: :delete if already_joined?(game_session)%>
+  <%= button_to I18n.t("game_sessions.join_btn"), join_game_session_path(game_session) unless already_joined?(game_session)%>
+  <%= button_to I18n.t("game_sessions.leave_btn"), leave_game_session_path(game_session), method: :delete if already_joined?(game_session)%>
 </div>

@@ -28,4 +28,60 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  players:
+    title: "Players"
+    balance: "Balance"
+    new_player_btn: "NEW PLAYER"
+    game_sessions_link: "GO TO GAME SESSIONS"
+    login_btn: "Login as"
+    logout_btn: "Logout"
+    notice:
+      update_success: "Player was successfully updated."
+      create_success: "Player was successfully created."
+      login_success: "Successfully logged in."
+      logout_success: "Successfully logged out."
+      destroy_success: "Player was successfully destroyed."
+
+  game_sessions: &game_sessions
+    title: "Game Sessions"
+    started_at: "Started at"
+    duration: "Duration"
+    players: "Players"
+    create_btn: "New game session"
+    back_link: "Back to players"
+    join_btn: "Join this session"
+    leave_btn: "Leave this session"
+    status:
+      null: 'Status' # FIXME
+      blank: 'Status'
+#        'null': 'Status'
+      '': 'Status'
+      in_progress: 'In progress'
+      discarded: 'Discarded'
+      completed: 'Completed'
+    notice:
+      create_success: "Game session was successfully created."
+      update_success: "Game session was successfully updated."
+      destroy_success: "Game session was successfully destroyed."
+      join_success: "Game session was successfully joined."
+      leave_success: "Game session was successfully left."
+    alert:
+      joined: "Already joined."
+      not_joined: "Not currently joined."
+
+  game_session:
+    <<: *game_sessions
+    title: "Title"
+    quest: "Current Objective"
+    get_quest_btn: "Get new quest"
+    back_btn: "Back to game sessions"
+
+  quest:
+    status:
+      title: 'Status'
+      in_progress: 'In progress'
+      discarded: 'Discarded'
+      completed: 'Completed'
+    reward: "Reward"
+    submit_btn: "Submit"
+    discard_btn: "Discard"

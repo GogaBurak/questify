@@ -6,16 +6,16 @@
 <%= render @game_session %>
 
 <% if @game_session_quest %>
-  <p class="objective-title">Current Objective</p>
+  <p class="objective-title"><%= I18n.t("game_session.quest") %></p>
 
   <%= render @game_session_quest%>
 <% elsif already_joined?(@game_session) %>
-  <%= button_to "Get new quest", game_session_quests_path(@game_session) %>
+  <%= button_to I18n.t("game_session.get_quest_btn"), game_session_quests_path(@game_session) %>
 <% end %>
 
 <%#= link_to "Quests", game_session_quests_path(@game_session) %>
 
 <div>
-  <%= link_to "Back to game sessions", game_sessions_path, class: "lnk-back" %>
+  <%= link_to I18n.t("game_session.back_btn"), game_sessions_path, class: "lnk-back" %>
   <%#= button_to "Destroy this game session", @game_session, method: :delete %> <!-- FIXME-->
 </div>

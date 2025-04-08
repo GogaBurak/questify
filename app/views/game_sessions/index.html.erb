@@ -1,6 +1,6 @@
 <% content_for :title, "GameSessions" %>
 
-<h1 class="headline">Game Sessions</h1>
+<h1 class="headline"><%= I18n.t("game_sessions.title") %></h1>
 
 <div id="game_sessions">
   <% @game_sessions.each do |game_session| %>
@@ -9,5 +9,5 @@
   <% end %>
 </div>
 
-<%= link_to "New game session", new_game_session_path, class: "lnk-new" %> |
-<%= link_to "Back to players", players_path, class: "lnk-back" %>
+<%= link_to I18n.t("game_sessions.create_btn"), new_game_session_path, class: "lnk-new" %> |
+<%= link_to I18n.t("game_sessions.back_link"), players_path, class: "lnk-back" %>

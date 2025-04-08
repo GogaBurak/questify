@@ -2,8 +2,12 @@ require "openai"
 
 class QuestGenerator
   API_KEY = ENV["OPENROUTER_API_KEY"] || Rails.application.credentials.dig(:openrouter, :api_key)
+  LOCALES = {
+    en: "english",
+    ru: "russian"
+  }
 
-  def self.generate(player_names, language = "english")
+  def self.generate(player_names)
     client = OpenAI::Client.new(
       access_token: API_KEY,
       uri_base: "https://openrouter.ai/api/v1"
@@ -14,7 +18,7 @@ class QuestGenerator
         model: "qwen/qwen2.5-vl-32b-instruct:free",
         messages: [
           { role: "system", content: "You are a Minecraft quest master who generates hilarious and chaotic quests. **Respond only in JSON format**." },
-          { role: "user", content: "Generate a unique and mischievous Minecraft quest in #{language}. Quest can target players #{player_names.join(", ")}. **Return JSON only** using this structure:\n\n" \
+          { role: "user", content: "Generate a unique and mischievous Minecraft quest in #{LOCALES[I18n.locale]}. Quest can target players #{player_names.join(", ")}. **Return JSON only** using this structure:\n\n" \
             "{\n" \
             '  "title": "[Funny Quest Title]",' \
             '  "description": "[Hilarious instructions]",' \
@@ -23,7 +27,7 @@ class QuestGenerator
             "Example:\n\n" \
             "{\n" \
             '  "title": "The Great Chicken Flood",' \
-            "  \"description\": \"Spawn an army of chickens in PlayerName\'s base until their FPS drops below 10. No mercy.\"," \
+            "  \"description\": \"Spawn an army of chickens in #{player_names.first || "other player"}\'s base until their FPS drops below 10. No mercy.\"," \
             '  "reward": 350' \
             "}\n\n" \
             "Now generate a **new** and **original** quest in JSON format!" }

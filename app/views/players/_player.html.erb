@@ -6,13 +6,13 @@
   </p>
 
   <p>
-    <strong>Balance:</strong>
+    <strong><%= I18n.t("players.balance") %>:</strong>
     <span class="player-balance">
       <%= player.balance %>
     </span>
   </p>
 
-  <%= button_to "Login as", login_player_path(player), class: "btn-login" unless cookies[Constants::AUTH_COOKIE] %>
+  <%= button_to I18n.t("players.login_btn"), login_player_path(player), class: "btn-login" unless cookies[Constants::AUTH_COOKIE] %>
     
 <!--  <p class="p-lnk">-->
     <%#= link_to "Show this player", player, class: 'lnk' %>

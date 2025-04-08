@@ -31,7 +31,7 @@ class GameSessionsController < ApplicationController
     @game_session = GameSession.new(game_session_params)
 
     if @game_session.save
-      redirect_to @game_session, notice: "Game session was successfully created."
+      redirect_to @game_session, notice: I18n.t("game_sessions.notice.create_success")
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class GameSessionsController < ApplicationController
   # PATCH/PUT /game_sessions/1
   def update
     if @game_session.update(game_session_params)
-      redirect_to @game_session, notice: "Game session was successfully updated."
+      redirect_to @game_session, notice: I18n.t("game_sessions.notice.update_success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -50,7 +50,7 @@ class GameSessionsController < ApplicationController
   def destroy
     @game_session.destroy!
 
-    redirect_to game_sessions_path, status: :see_other, notice: "Game session was successfully destroyed."
+    redirect_to game_sessions_path, status: :see_other, notice: I18n.t("game_sessions.notice.destroy_success")
   end
 
   # POST /game_sessions/1/join
@@ -61,7 +61,7 @@ class GameSessionsController < ApplicationController
     else
       @game_session.players << @current_player
 
-      flash[:notice] = "Game session was successfully joined."
+      flash[:notice] = I18n.t("game_sessions.notice.join_success")
       redirect_back_or_to game_session_path(@game_session)
     end
   end
@@ -71,10 +71,10 @@ class GameSessionsController < ApplicationController
     if already_joined?(@game_session)
       @game_session.players.delete(@current_player)
 
-      flash[:notice] = "Game session was successfully left."
+      flash[:notice] = I18n.t("game_sessions.notice.leave_success")
       redirect_to game_session_path(@game_session)
     else
-      flash[:alert] = "Not currently joined."
+      flash[:alert] = I18n.t("game_sessions.alert.not_joined")
       redirect_to game_session_path(@game_session)
     end
   end

@@ -1,27 +1,23 @@
 <div id="<%= dom_id quest %>">
+
+  <p><%= quest.title %></p>
+  <p><%= quest.description %></p>
+
   <p>
-    <%= quest.title %>
+    <strong><%= I18n.t("quest.status.title") %>:</strong>
+    <%= I18n.t("quest.status.#{quest.status}") %>
   </p>
 
   <p>
-    <%= quest.description %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= quest.status %>
-  </p>
-
-  <p>
-    <strong>Reward:</strong>
+    <strong><%= I18n.t("quest.reward") %>:</strong>
     <%= quest.reward %>
   </p>
 
-  <%= button_to "Submit",
+  <%= button_to I18n.t("quest.submit_btn"),
                 submit_game_session_quest_path(@game_session, quest),
                 method: :patch,
                 data: { controller: 'confirm', action: 'click->confirm#confirm' } %>
-  <%= button_to "Discard",
+  <%= button_to I18n.t("quest.discard_btn"),
                 discard_game_session_quest_path(@game_session, quest),
                 method: :delete,
                 data: { controller: 'confirm', action: 'click->confirm#confirm' } %>

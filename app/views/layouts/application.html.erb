@@ -29,11 +29,16 @@
 
   <body style="background-image: url('/background.png');"> <!-- FIXME -->
     <div class="container">
+      <%# Locale switch %>
+      <% other_locale = I18n.locale == :en ? :ru : :en %>
+      <%= link_to other_locale.to_s.upcase, url_for(locale: other_locale) %>
+
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+
       <div class="scroll">
         <%= yield %>
       </div>
-    <div>
+    </div>
   </body>
 </html>
